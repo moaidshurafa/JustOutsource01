@@ -1,0 +1,51 @@
+﻿@* @model JobVM
+<form method="post">
+    <input asp-for="Job.Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-1">
+            <h2 class="text-primary">Edit Job</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Job Title</label>
+            <input asp-for="Job.Title" class="form-control" />
+            <span asp-validation-for="Job.Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Job Description</label>
+            <input asp-for="Job.Description" class="form-control" />
+            <span asp-validation-for="Job.Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Job Required Skills</label>
+            <input asp-for="Job.RequiredSkills" class="form-control" />
+            <span asp-validation-for="Job.RequiredSkills" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Category</label>
+            <select asp-for="Job.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+                <option value="">Select Category</option>
+            </select>
+            <span asp-validation-for="Job.CategoryId" class="text-danger"></span>
+        </div>
+
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control"><i class="bi bi-plus-circle"></i> Edit</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Job" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to Jobs List
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+ *@

@@ -1,0 +1,64 @@
+﻿@* @model List<Job>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Job List
+            </h2>
+        </div>
+        @* <div class="col-6 text-end">
+        <a asp-controller="Job" asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> ADD NEW JOB
+        </a>
+        </div> 
+    </div>
+
+    <table class="table table-bordered table-striped width="100%">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                 <th>
+                    Description
+                </th> 
+                <th>
+                    Required Skills
+                </th>
+                <th>
+                    Category
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.Title</td>
+@*                     <td>@c.Description</td>
+                    <td>@c.RequiredSkills</td>
+                    <td>@c.Category.CategoryName</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@c.Id" class="btn btn-primary">
+                            <i class="bi bi-pencil-square"></i> Details
+                        </a>
+                    </td>
+
+                    @* <td>
+                <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-primary">
+                <i class="bi bi-pencil-square"></i> Edit
+                </a> |
+                <a asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger">
+                <i class="bi bi-trash3-fill"></i> Delete
+                </a>
+                </td> 
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+ *@

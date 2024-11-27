@@ -1,0 +1,95 @@
+﻿@model FreelancerVM
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.Freelancer.Id!=0?"Update":"Create") Freelancer</h2>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Freelancer.Id" hidden/>
+            <input asp-for="Freelancer.ImageUrl" hidden />
+
+            <div class="row">
+                <div class="col-10">
+                    <div class="border p-3">
+                        <div class="row pb-2">
+                        </div>
+                        <div asp-validation-summary="All"></div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Freelancer.Name" class="form-control border-0 shadow" />
+                            <label asp-for="Freelancer.Name" class="ms-2">Name</label>
+                            <span asp-validation-for="Freelancer.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Freelancer.Skills" class="form-control border-0 shadow" />
+                            <label asp-for="Freelancer.Skills" class="ms-2">Skills</label>
+                            <span asp-validation-for="Freelancer.Skills" class="text-danger"></span>
+
+                        </div>
+                        <div class="py-2 col-12">
+                            <label asp-for="Freelancer.ProfileDescription" class="ms-2 text-muted">Description</label>
+                            <textarea asp-for="Freelancer.ProfileDescription" class="form-control border-0 shadow"></textarea>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="Freelancer.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                                <option disabled selected>--Select Category--</option>
+                            </select>
+                            <label asp-for="Freelancer.CategoryId" class="ms-2">Category</label>
+                            <span asp-validation-for="Freelancer.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Freelancer.ListPrice" class="form-control border-0 shadow" />
+                            <label asp-for="Freelancer.ListPrice" class="ms-2">Price</label>
+                            <span asp-validation-for="Freelancer.ListPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input type="file" name="file" class="form-control border-0 shadow" />
+                            <label asp-for="Freelancer.ImageUrl" class="ms-2">ImageUrl</label>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                @if (Model.Freelancer.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                }
+
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Freelancer" asp-action="Index" class="btn btn-outline-primary border form-control">Back To List</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <img src="@Model.Freelancer.ImageUrl" width="100%"
+                         style="border-radius: 5px; border: 1px solid #bbb9b9" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | numlist bullist indent outdent ',
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
