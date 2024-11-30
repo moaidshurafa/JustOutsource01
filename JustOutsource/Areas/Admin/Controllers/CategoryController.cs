@@ -1,14 +1,15 @@
 ﻿using JustOutsource.DataAccess.Data;
 using JustOutsource.DataAccess.Respiratory.IRespiratory;
 using JustOutsource.Models;
+using JustOutsource.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JustOutsource.Areas.Admin.Controllers
 {
-    //   [Authorize(Roles = "Admin")]
+      
     [Area("Admin")]
-
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
 
