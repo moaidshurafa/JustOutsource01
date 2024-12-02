@@ -27,13 +27,13 @@ namespace JustOutsource.Models
         [Display(Name = "From ")]
         [Range(0, 10000)]
         public double ListPrice { get; set; }
-
-        //[Required]
-        //[Display(Name = "From ")]
-        //[Range(0, 10000)]
-        //public double Price { get; set; }
+        //public string ApplicationUserId { get; set; }
+        //[ForeignKey("ApplicationUserId")]
+        //[ValidateNever]
+        //public ApplicationUser ApplicationUser { get; set; }
         [ValidateNever]
         public string ImageUrl { get; set; }
+        public string? UserId { get; set; }
 
 
     }

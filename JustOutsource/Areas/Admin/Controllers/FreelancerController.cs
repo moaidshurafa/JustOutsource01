@@ -1,4 +1,5 @@
-﻿using JustOutsource.DataAccess.Data;
+﻿using Humanizer;
+using JustOutsource.DataAccess.Data;
 using JustOutsource.DataAccess.Respiratory.IRespiratory;
 using JustOutsource.Models;
 using JustOutsource.Models.ViewModels;
@@ -8,13 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 using System.Collections.Generic;
+using System.Security.Claims;
 
 
 
 namespace JustOutsource.Areas.Admin.Controllers
 {
-    //   [Authorize(Roles = "Admin")]
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Freelancer)]
 
     public class FreelancerController : Controller
     {
@@ -28,8 +30,11 @@ namespace JustOutsource.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Freelancer> freelancers = _unitOfWork.Freelancer.GetAll(includeProperties:"Category").ToList();
-            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            List<Freelancer> freelancers = _unitOfWork.Freelancer.GetAll(includeProperties: "Category")
+                .Where(u => u.UserId == userId)  // Filter by the current user's UserId
+                .ToList();
+
             return View(freelancers);
         }
         public IActionResult Upsert(int? id)
@@ -44,7 +49,7 @@ namespace JustOutsource.Areas.Admin.Controllers
                 }),
                 Freelancer = new Freelancer()
             };
-            if(id == 0 || id == null)
+            if (id == 0 || id == null)
             {
                 //create
                 return View(freelancerVM);
@@ -53,7 +58,16 @@ namespace JustOutsource.Areas.Admin.Controllers
             else
             {
                 //update
-                freelancerVM.Freelancer = _unitOfWork.Freelancer.Get(u=>u.Id == id);
+                // Update existing freelancer
+                var freelancerFromDb = _unitOfWork.Freelancer.Get(u => u.Id == id);
+
+                // Check if the freelancer belongs to the current user
+                if (freelancerFromDb == null || freelancerFromDb.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                {
+                    // If not, return NotFound
+                    return RedirectToAction("Index");
+                }
+                freelancerVM.Freelancer = _unitOfWork.Freelancer.Get(u => u.Id == id);
                 return View(freelancerVM);
 
             }
@@ -64,7 +78,7 @@ namespace JustOutsource.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if(file !=  null)
+                if (file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string freelancerPath = Path.Combine(wwwRootPath, @"Images\Freelancer");
@@ -88,13 +102,19 @@ namespace JustOutsource.Areas.Admin.Controllers
 
                 }
 
-
+                // Set the UserId to the current logged-in user's UserId
+                freelancerVM.Freelancer.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (freelancerVM.Freelancer.Id == 0)
                 {
                     _unitOfWork.Freelancer.Add(freelancerVM.Freelancer);
                 }
                 else
                 {
+                    var existingFreelancer = _unitOfWork.Freelancer.Get(u => u.Id == freelancerVM.Freelancer.Id);
+                    if (existingFreelancer == null || existingFreelancer.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    {
+                        return RedirectToAction("Index"); // Prevent updating freelancers that don't belong to the current user
+                    }
                     _unitOfWork.Freelancer.Update(freelancerVM.Freelancer);
                 }
                 _unitOfWork.Save();
@@ -113,7 +133,7 @@ namespace JustOutsource.Areas.Admin.Controllers
 
             }
         }
-        
+
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -124,9 +144,9 @@ namespace JustOutsource.Areas.Admin.Controllers
             Freelancer? freelancerFromDb = _unitOfWork.Freelancer.Get(u => u.Id == id);
 
 
-            if (freelancerFromDb == null)
+            if (freelancerFromDb == null || freelancerFromDb.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             return View(freelancerFromDb);
 
@@ -136,9 +156,9 @@ namespace JustOutsource.Areas.Admin.Controllers
         {
             Freelancer? obj = _unitOfWork.Freelancer.Get(u => u.Id == id);
 
-            if (obj == null)
+            if (obj == null || obj.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
             _unitOfWork.Freelancer.Remove(obj);

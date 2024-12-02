@@ -10,6 +10,8 @@ namespace JustOutsource.DataAccess.Respiratory.IRespiratory
     {
         ICategoryRespiratory Category { get; }
         IFreelancerRespiratory Freelancer { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

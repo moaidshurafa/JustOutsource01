@@ -1,7 +1,9 @@
 using JustOutsource.DataAccess.Respiratory.IRespiratory;
 using JustOutsource.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace JustOutsource.Areas.Customer.Controllers
 {
@@ -23,8 +25,40 @@ namespace JustOutsource.Areas.Customer.Controllers
         }
         public IActionResult Details(int freelancerId)
         {
-            Freelancer freelancer = _unitOfWork.Freelancer.Get(u=>u.Id== freelancerId, includeProperties: "Category");
-            return View(freelancer);
+            ShoppingCart cart = new()
+            {
+                Freelancer = _unitOfWork.Freelancer.Get(u => u.Id == freelancerId, includeProperties: "Category"),
+                FreelancerId = freelancerId
+            };
+            return View(cart);
+        }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicationUserId = userId;
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
+            u.FreelancerId == shoppingCart.FreelancerId);
+
+            if (cartFromDb == null)
+            {
+                // shopping cart exists
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+                TempData["success"] = "Freelancer is added successfully to your cart.";
+
+            }
+            else
+            {
+                // add cart record
+                TempData["success"] = "This freelancer is already in your cart.";
+
+
+            }
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
