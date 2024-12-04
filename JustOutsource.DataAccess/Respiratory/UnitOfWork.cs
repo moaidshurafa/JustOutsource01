@@ -17,6 +17,8 @@ namespace JustOutsource.DataAccess.Respiratory
         public ICategoryRespiratory Category { get; private set; }
         public IFreelancerRespiratory Freelancer { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IOrderHeaderRespiratory OrderHeader { get; private set; }
+        public IOrderDetailRespiratory OrderDetail { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db) 
         {
@@ -25,6 +27,8 @@ namespace JustOutsource.DataAccess.Respiratory
             ShoppingCart = new ShoppingCartRepository(_db);
             Category = new CategoryRespiratory(_db);
             Freelancer = new FreelancerRespiratory(_db);
+            OrderHeader = new OrderHeaderRespiratory(_db);
+            OrderDetail = new OrderDeatilRespiratory(_db);
         }
         
 
