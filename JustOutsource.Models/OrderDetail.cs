@@ -19,8 +19,8 @@ namespace JustOutsource.Models
         public OrderHeader OrderHeader { get; set; }
 
         [Required]
-        public int ProductId { get; set; }
-        [ForeignKey("ProductId")]
+        public int FreelancerId { get; set; }
+        [ForeignKey("FreelancerId")]
         [ValidateNever]
         public Freelancer Freelancer { get; set; }
 
