@@ -18,15 +18,7 @@ namespace JustOutsource.DataAccess.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        //public DbSet<Job> Jobs { get; set; }
-        //public DbSet<ApplicationUser> applicationUsers { get; set; }
-        //public DbSet<Service> Services { get; set; }
-        //public DbSet<Freelancer> Freelancers { get; set; }
-        //public DbSet<Client> Clients { get; set; }
-        //public DbSet<Order> Orders { get; set; }
-        //public DbSet<Review> Reviews { get; set; }
-        //public DbSet<Transaction> Transactions { get; set; }
-        //public DbSet<Message> Messages { get; set; }
+        
 
     }
 }
