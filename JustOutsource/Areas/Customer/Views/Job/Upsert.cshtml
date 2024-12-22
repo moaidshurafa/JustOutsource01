@@ -1,0 +1,103 @@
+﻿@model JobVM
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.Job.Id != 0 ? "Update" : "Post") Job</h2>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Job.Id" hidden />
+
+            <div class="row">
+                <div class="col-10">
+                    <div class="border p-3">
+                        <div class="row pb-2">
+                        </div>
+                        <div asp-validation-summary="All"></div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Job.Title" class="form-control border-0 shadow" />
+                            <label asp-for="Job.Title" class="ms-2">Title</label>
+                            <span asp-validation-for="Job.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Job.RequiredSkills" class="form-control border-0 shadow" />
+                            <label asp-for="Job.RequiredSkills" class="ms-2">Skills</label>
+                            <span asp-validation-for="Job.RequiredSkills" class="text-danger"></span>
+
+                        </div>
+                        <div class="py-2 col-12">
+                            <label asp-for="Job.Description" class="ms-2 text-muted">Description</label>
+                            <textarea asp-for="Job.Description" class="form-control border-0 shadow"></textarea>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="Job.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                                <option disabled selected>--Select Category--</option>
+                            </select>
+                            <label asp-for="Job.CategoryId" class="ms-2">Category</label>
+                            <span asp-validation-for="Job.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Job.Budget" class="form-control border-0 shadow" />
+                            <label asp-for="Job.Budget" class="ms-2">Budget</label>
+                            <span asp-validation-for="Job.Budget" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Job.EmailToContact" class="form-control border-0 shadow" />
+                            <label asp-for="Job.EmailToContact" class="ms-2">Email</label>
+                            <span asp-validation-for="Job.EmailToContact" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Job.PhoneNumber" class="form-control border-0 shadow" />
+                            <label asp-for="Job.PhoneNumber" class="ms-2">Phone Number</label>
+                            <span asp-validation-for="Job.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input type="file" name="AdditionalFile" class="form-control border-0 shadow" />
+                            <label asp-for="Job.AdditionalFile" class="ms-2">Additional File</label>
+                        </div>
+
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                @if (Model.Job.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Post</button>
+                                }
+
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Job" asp-action="Index" class="btn btn-outline-primary border form-control">Back To List</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | numlist bullist indent outdent ',
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

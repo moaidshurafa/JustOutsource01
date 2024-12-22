@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm  navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-heart-fill"></i>JustOutsource</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-laptop"></i> JustOutsource</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -48,6 +48,12 @@
                         @if(User.IsInRole(SD.Role_Freelancer)){
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Admin" asp-controller="Freelancer" asp-action="Index">Add Freelancer</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.Role_Job))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Customer" asp-controller="Job" asp-action="Index">Post Job</a>
                             </li>
                         }
                         <li class="nav-item">

@@ -19,6 +19,7 @@ namespace JustOutsource.DataAccess.Respiratory
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IOrderHeaderRespiratory OrderHeader { get; private set; }
         public IOrderDetailRespiratory OrderDetail { get; private set; }
+        public IJobRepository Job { get; private set; }  
 
         public UnitOfWork(ApplicationDbContext db) 
         {
@@ -29,6 +30,7 @@ namespace JustOutsource.DataAccess.Respiratory
             Freelancer = new FreelancerRespiratory(_db);
             OrderHeader = new OrderHeaderRespiratory(_db);
             OrderDetail = new OrderDeatilRespiratory(_db);
+            Job = new JobRespiratory(_db);
         }
         
 

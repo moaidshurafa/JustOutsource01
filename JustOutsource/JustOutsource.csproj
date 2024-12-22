@@ -25,6 +25,8 @@
 
 	<ItemGroup>
 		<Folder Include="Areas\Identity\Data\" />
+		<Folder Include="wwwroot\Files\CVs\" />
+		<Folder Include="wwwroot\Files\AdditionalFiles\" />
 		<Folder Include="wwwroot\Images\Freelancer\" />
 	</ItemGroup>
 

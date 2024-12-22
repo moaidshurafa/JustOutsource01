@@ -28,9 +28,15 @@ namespace JustOutsource.DataAccess.Respiratory
                 objFromDb.ProfileDescription = obj.ProfileDescription;
                 objFromDb.Category = obj.Category;
                 objFromDb.ListPrice = obj.ListPrice;
+                objFromDb.YearsOfExperience = obj.YearsOfExperience;
+                objFromDb.DateOfBirth = obj.DateOfBirth;
                 if (obj.ImageUrl != null)
                 {
                     objFromDb.ImageUrl = obj.ImageUrl;
+                }
+                if(obj.CV != null)
+                {
+                    objFromDb.CV = obj.CV;
                 }
             }
         }

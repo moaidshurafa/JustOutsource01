@@ -33,6 +33,12 @@ namespace JustOutsource.Models
         //public ApplicationUser ApplicationUser { get; set; }
         [ValidateNever]
         public string ImageUrl { get; set; }
+        [ValidateNever]
+        public string CV { get; set; }
+        [Required]
+        public DateTime DateOfBirth { get; set; } // Add this
+        [Required]
+        public int YearsOfExperience { get; set; }
         public string? UserId { get; set; }
 
 

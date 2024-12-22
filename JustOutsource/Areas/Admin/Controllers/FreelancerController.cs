@@ -73,7 +73,7 @@ namespace JustOutsource.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Upsert(FreelancerVM freelancerVM, IFormFile? file)
+        public IActionResult Upsert(FreelancerVM freelancerVM, IFormFile? file, IFormFile? cvFile)
         {
             if (ModelState.IsValid)
             {
@@ -100,6 +100,25 @@ namespace JustOutsource.Areas.Admin.Controllers
                     }
                     freelancerVM.Freelancer.ImageUrl = @"\Images\Freelancer\" + fileName;
 
+                }
+                if(cvFile != null)
+                {
+                    string cvFileName = Guid.NewGuid().ToString() + Path.GetExtension(cvFile.FileName);
+                    string cvPath = Path.Combine(wwwRootPath, @"Files\CVs");
+                    if (!string.IsNullOrEmpty(freelancerVM.Freelancer.CV))
+                    {
+                        var oldCvPath = 
+                            Path.Combine(wwwRootPath, freelancerVM.Freelancer.CV.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldCvPath))
+                        {
+                            System.IO.File.Delete(oldCvPath);
+                        }
+                    }
+                    using (var cvStream = new FileStream(Path.Combine(cvPath, cvFileName), FileMode.Create))
+                    {
+                        cvFile.CopyTo(cvStream);
+                    }
+                    freelancerVM.Freelancer.CV = @"\Files\CVs\" + cvFileName;
                 }
 
                 // Set the UserId to the current logged-in user's UserId

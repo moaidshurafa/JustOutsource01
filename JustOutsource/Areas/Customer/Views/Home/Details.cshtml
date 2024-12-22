@@ -36,9 +36,39 @@
                                 </span>
                             </h6>
                         </div>
-                       
+                        <div class="row pl-2 my-3">
+                            <div class="col-6">
+                                <div class="p-3 rounded border bg-light text-center shadow-sm">
+                                    <h6 class="text-muted text-uppercase fw-bold mb-1">Years of Experience</h6>
+                                    <p class="fs-5 fw-semibold text-dark mb-0">@Model.Freelancer.YearsOfExperience</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-3 rounded border bg-light text-center shadow-sm">
+                                    <h6 class="text-muted text-uppercase fw-bold mb-1">Age</h6>
+                                    <p class="fs-5 fw-semibold text-dark mb-0">
+                                        @(DateTime.Now.Year - Model.Freelancer.DateOfBirth.Year -
+                                            (DateTime.Now < Model.Freelancer.DateOfBirth.AddYears(DateTime.Now.Year - Model.Freelancer.DateOfBirth.Year) ? 1 : 0))
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row pl-2 my-3">
                             <p class="text-secondary lh-sm">@Html.Raw(Model.Freelancer.ProfileDescription)</p>
+                        </div>
+                        <div class="row pl-2 mb-3">
+                            <div class="col-md-12">
+                                @if (!string.IsNullOrEmpty(Model.Freelancer.CV))
+                                {
+                                    <a href="@Url.Content(Model.Freelancer.CV)" target="_blank" class="btn btn-outline-success">
+                                        <i class="fa fa-download"></i> Download CV
+                                    </a>
+                                }
+                                else
+                                {
+                                    <p class="text-danger">No CV uploaded for this freelancer.</p>
+                                }
+                            </div>
                         </div>
                         <div class="row pl-2 mb-3">
                             <div class="col-md-4">
