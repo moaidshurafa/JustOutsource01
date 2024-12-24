@@ -23,6 +23,10 @@ namespace JustOutsource.Areas.Customer.Controllers
             IEnumerable<Freelancer> freelancerList = _unitOfWork.Freelancer.GetAll(includeProperties:"Category");
             return View(freelancerList);
         }
+        public IActionResult About()
+        {
+            return View();
+        }
         public IActionResult Details(int freelancerId)
         {
             ShoppingCart cart = new()

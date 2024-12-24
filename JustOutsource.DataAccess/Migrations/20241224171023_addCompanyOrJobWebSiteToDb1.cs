@@ -5,42 +5,46 @@
 namespace JustOutsource.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addCountDaysToDb : Migration
+    public partial class addCompanyOrJobWebSiteToDb1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<string>(
+                name: "CompanyOrJobWebSite",
+                table: "Jobs",
+                type: "nvarchar(2083)",
+                maxLength: 2083,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(2083)",
+                oldMaxLength: 2083);
+
             migrationBuilder.AddColumn<int>(
-                name: "CountDays",
-                table: "ShoppingCarts",
+                name: "Type",
+                table: "Jobs",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "UserId",
-                table: "Freelancers",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "CountDays",
-                table: "ShoppingCarts");
+                name: "Type",
+                table: "Jobs");
 
             migrationBuilder.AlterColumn<string>(
-                name: "UserId",
-                table: "Freelancers",
-                type: "nvarchar(max)",
+                name: "CompanyOrJobWebSite",
+                table: "Jobs",
+                type: "nvarchar(2083)",
+                maxLength: 2083,
                 nullable: false,
                 defaultValue: "",
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
+                oldType: "nvarchar(2083)",
+                oldMaxLength: 2083,
                 oldNullable: true);
         }
     }

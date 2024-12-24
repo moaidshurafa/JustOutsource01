@@ -1,0 +1,20 @@
+﻿@model Job
+<div class="container mt-5">
+    <div class="card border-0 shadow p-4">
+        <h2 class="text-dark text-center">@Model.Title</h2>
+        <h4 class="text-secondary text-center">@Model.Category.CategoryName</h4>
+        <p class="mt-3"><strong>Description:</strong> @Html.Raw(Model.Description)</p>
+        <p><strong>Required Skills:</strong> @Model.RequiredSkills</p>
+        <p><strong>Expected Salary:</strong> @(Model.Budget.ToString("c"))</p>
+        <p><strong>Contact Email:</strong> <a href="mailto:@Model.EmailToContact">@Model.EmailToContact</a></p>
+        <p><strong>Phone:</strong> <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a></p>
+        @if (!string.IsNullOrEmpty(Model.CompanyOrJobWebSite))
+        {
+            <p><strong>Company Site:</strong> <a href="@Model.CompanyOrJobWebSite">@Model.CompanyOrJobWebSite</a></p>
+        }
+        <p><strong>Job Type:</strong> @Model.Type</p>
+
+
+
+    </div>
+</div>

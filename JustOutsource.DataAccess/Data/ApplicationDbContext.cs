@@ -20,7 +20,9 @@ namespace JustOutsource.DataAccess.Data
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         
-        
+
+
+
 
     }
 }

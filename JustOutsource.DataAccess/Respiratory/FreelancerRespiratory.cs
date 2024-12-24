@@ -30,6 +30,8 @@ namespace JustOutsource.DataAccess.Respiratory
                 objFromDb.ListPrice = obj.ListPrice;
                 objFromDb.YearsOfExperience = obj.YearsOfExperience;
                 objFromDb.DateOfBirth = obj.DateOfBirth;
+                objFromDb.LinkedInUrl = obj.LinkedInUrl;
+                objFromDb.GitHubUrl = obj.GitHubUrl;
                 if (obj.ImageUrl != null)
                 {
                     objFromDb.ImageUrl = obj.ImageUrl;

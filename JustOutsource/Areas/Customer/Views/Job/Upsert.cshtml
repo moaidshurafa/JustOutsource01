@@ -61,6 +61,19 @@
                             <input type="file" name="AdditionalFile" class="form-control border-0 shadow" />
                             <label asp-for="Job.AdditionalFile" class="ms-2">Additional File</label>
                         </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Job.CompanyOrJobWebSite" class="form-control border-0 shadow" />
+                            <label asp-for="Job.CompanyOrJobWebSite" class="ms-2">Company Or Job Website</label>
+                            <span asp-validation-for="Job.CompanyOrJobWebSite" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="Job.Type" asp-items="Html.GetEnumSelectList<JobType>()" class="form-select border-0 shadow">
+                                <option disabled selected>-- Select Job Type --</option>
+                            </select>
+                            <label asp-for="Job.Type" class="ms-2">Job Type</label>
+                            <span asp-validation-for="Job.Type" class="text-danger"></span>
+                        </div>
+
 
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">

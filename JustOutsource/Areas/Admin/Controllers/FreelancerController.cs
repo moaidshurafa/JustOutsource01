@@ -101,13 +101,13 @@ namespace JustOutsource.Areas.Admin.Controllers
                     freelancerVM.Freelancer.ImageUrl = @"\Images\Freelancer\" + fileName;
 
                 }
-                if(cvFile != null)
+                if (cvFile != null)
                 {
                     string cvFileName = Guid.NewGuid().ToString() + Path.GetExtension(cvFile.FileName);
                     string cvPath = Path.Combine(wwwRootPath, @"Files\CVs");
                     if (!string.IsNullOrEmpty(freelancerVM.Freelancer.CV))
                     {
-                        var oldCvPath = 
+                        var oldCvPath =
                             Path.Combine(wwwRootPath, freelancerVM.Freelancer.CV.TrimStart('\\'));
                         if (System.IO.File.Exists(oldCvPath))
                         {
@@ -185,5 +185,28 @@ namespace JustOutsource.Areas.Admin.Controllers
             TempData["success"] = "Freelancer deleted successfully";
             return RedirectToAction("Index");
         }
+        public IActionResult FindJob()
+        {
+            IEnumerable<Job> JobList = _unitOfWork.Job.GetAll(includeProperties: "Category");
+            return View(JobList);
+        }
+        public IActionResult Details(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            // Fetch the job with its related category details
+            var jobFromDb = _unitOfWork.Job.Get(u => u.Id == id, includeProperties: "Category");
+
+            if (jobFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobFromDb);
+        }
+        
     }
 }

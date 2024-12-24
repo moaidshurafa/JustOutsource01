@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Job>
+<div class="container mt-5">
+
+    @foreach (var job in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                        <div class="card-body">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center"><strong>@job.Title</strong></p>
+                                <p class="card-title text-warning text-center"><b>@job.Category.CategoryName</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center mb-0">From <span>@job.Budget.ToString("c")</span></p>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Details"
+                               asp-route-id="@job.Id"
+                               class="btn btn-primary bg-gradient border-0 form-control">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

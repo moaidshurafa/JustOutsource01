@@ -27,10 +27,6 @@ namespace JustOutsource.Models
         [Display(Name = "From ")]
         [Range(0, 10000)]
         public double ListPrice { get; set; }
-        //public string ApplicationUserId { get; set; }
-        //[ForeignKey("ApplicationUserId")]
-        //[ValidateNever]
-        //public ApplicationUser ApplicationUser { get; set; }
         [ValidateNever]
         public string ImageUrl { get; set; }
         [ValidateNever]
@@ -39,6 +35,15 @@ namespace JustOutsource.Models
         public DateTime DateOfBirth { get; set; } // Add this
         [Required]
         public int YearsOfExperience { get; set; }
+        [Url]
+        [StringLength(2083)] // Maximum URL length
+        [Display(Name = "LinkedIn Profile")]
+        public string LinkedInUrl { get; set; }
+
+        [Url]
+        [StringLength(2083)]
+        [Display(Name = "GitHub Profile")]
+        public string GitHubUrl { get; set; }
         public string? UserId { get; set; }
 
 

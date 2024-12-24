@@ -65,6 +65,16 @@
                             <label asp-for="Freelancer.YearsOfExperience" class="ms-2">Years Of Experience</label>
                             <span asp-validation-for="Freelancer.YearsOfExperience" class="text-danger"></span>
                         </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Freelancer.LinkedInUrl" class="form-control border-0 shadow" />
+                            <label asp-for="Freelancer.LinkedInUrl" class="ms-2">LinkedIn Profile</label>
+                            <span asp-validation-for="Freelancer.LinkedInUrl" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Freelancer.GitHubUrl" class="form-control border-0 shadow" />
+                            <label asp-for="Freelancer.GitHubUrl" class="ms-2">GitHub Profile</label>
+                            <span asp-validation-for="Freelancer.GitHubUrl" class="text-danger"></span>
+                        </div>
 
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">

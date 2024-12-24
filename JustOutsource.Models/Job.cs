@@ -34,7 +34,18 @@ namespace JustOutsource.Models
         public string PhoneNumber { get; set; }
         [ValidateNever]
         public string AdditionalFile { get; set; }
+        [Url]
+        [StringLength(2083)]
+        public string? CompanyOrJobWebSite { get; set; }
+        [Required]
+        public JobType Type { get; set; }
         public string? UserId { get; set; }
 
+    }
+    public enum JobType
+    {
+        FullTime,
+        PartTime,
+        Freelance
     }
 }

@@ -5,22 +5,23 @@
 namespace JustOutsource.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class hjhj : Migration
+    public partial class bbvv : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "AdditionalFile",
-                table: "Jobs",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                name: "GitHubUrl",
+                table: "Freelancers",
+                type: "nvarchar(2083)",
+                maxLength: 2083,
+                nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "UserId",
-                table: "Jobs",
-                type: "nvarchar(max)",
+                name: "LinkedInUrl",
+                table: "Freelancers",
+                type: "nvarchar(2083)",
+                maxLength: 2083,
                 nullable: true);
         }
 
@@ -28,12 +29,12 @@ namespace JustOutsource.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "AdditionalFile",
-                table: "Jobs");
+                name: "GitHubUrl",
+                table: "Freelancers");
 
             migrationBuilder.DropColumn(
-                name: "UserId",
-                table: "Jobs");
+                name: "LinkedInUrl",
+                table: "Freelancers");
         }
     }
 }

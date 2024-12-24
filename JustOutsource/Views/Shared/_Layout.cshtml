@@ -47,20 +47,33 @@
                         }
                         @if(User.IsInRole(SD.Role_Freelancer)){
                             <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Freelancer" asp-action="FindJob">Find a Job</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" asp-area="Admin" asp-controller="Freelancer" asp-action="Index">Add Freelancer</a>
                             </li>
+                            
                         }
                         @if (User.IsInRole(SD.Role_Job))
                         {
                             <li class="nav-item">
+                                <a class="nav-link" asp-area="Customer" asp-controller="Job" asp-action="FindFreelancers">Find a Freelancers</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Job" asp-action="Index">Post Job</a>
                             </li>
+                           
                         }
+                        
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
                                 <i class="bi bi-cart"></i> &nbsp;
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="About">About Us</a>
+                        </li>
+                        
                         
                         @*     @if (User.IsInRole(SD.Role_Job) || User.IsInRole(SD.Role_Admin))
                         {
@@ -106,5 +119,7 @@
     <script src="https://cdn.tiny.cloud/1/b7eymwazo14pt8e5noksxermy5lgc538qauw6spqoxe8h8bx/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    
+
 </body>
 </html>

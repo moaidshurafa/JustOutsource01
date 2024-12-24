@@ -1,6 +1,74 @@
 ﻿@model IEnumerable<Freelancer>
 
-<div class="row pb-3">
+<div class="container mt-5">
+    <!-- Carousel Section -->
+    <div class="row pb-3">
+        <div id="carouselExampleIndicators" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <!-- Carousel Images -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/images/Outsourcing01-scaled-2560x1280.jpg" class="d-block w-100 rounded" alt="Outsourcing Slide 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="text-light bg-dark bg-opacity-50 px-3 py-2 rounded">Outsourcing Excellence</h5>
+                        <p class="text-light bg-dark bg-opacity-50 px-3 py-1 rounded">Achieve more with our dedicated professionals.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/OIP (3).jpg" class="d-block w-100 rounded" alt="Outsourcing Slide 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="text-light bg-dark bg-opacity-50 px-3 py-2 rounded">Expert Solutions</h5>
+                        <p class="text-light bg-dark bg-opacity-50 px-3 py-1 rounded">Let us bring expertise to your projects.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/OIP (4).jpg" class="d-block w-100 rounded" alt="Outsourcing Slide 3">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="text-light bg-dark bg-opacity-50 px-3 py-2 rounded">Grow Your Business</h5>
+                        <p class="text-light bg-dark bg-opacity-50 px-3 py-1 rounded">Scaling up your business has never been easier.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Navigation -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Additional Content Section -->
+    @if(User.IsInRole(SD.Role_Job))
+    {
+        <div class="row text-center mt-5">
+            <h1 class="display-5 fw-bold">Welcome to JustOutsource</h1>
+            <p class="text-muted fs-5">We connect you with the best freelancers to get your projects done seamlessly.</p>
+            <a asp-controller="Job" asp-action="Index" class="btn btn-primary btn-lg shadow">Post a Job</a>
+        </div>
+    }
+    else if (User.IsInRole(SD.Role_Freelancer))
+    {
+        <div class="row text-center mt-5">
+            <h1 class="display-5 fw-bold">Welcome to JustOutsource</h1>
+            <p class="text-muted fs-5">We connect you with the best freelancers to get your projects done seamlessly.</p>
+            <a asp-area="Admin" asp-controller="Freelancer" asp-action="Index" class="btn btn-primary btn-lg shadow">Add a Freelancer</a>
+        </div>
+    }
+
+</div>
+@* <div class="container mt-5">
+
     @foreach (var freelancer in Model)
     {
         <div class="col-lg-3 col-sm-6">
@@ -20,7 +88,7 @@
                         <div>
                             <a asp-action="Details"
                                asp-route-freelancerId="@freelancer.Id"
-                            class="btn btn-primary bg-gradient border-0 form-control">
+                               class="btn btn-primary bg-gradient border-0 form-control">
                                 Details
                             </a>
                         </div>
@@ -30,4 +98,15 @@
         </div>
     }
 
+</div> *@
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="fw-bold">About Us</h1>
+            <p class="mt-4">
+                At <strong>JustOutsource</strong>, we connect you with the best freelancers to get your projects done seamlessly.<br />
+                At JustOutsource, we bridge the gap between businesses and talented freelancers, empowering both to achieve their goals. Whether you're looking to scale your business or seeking your next opportunity as a freelancer, we provide a seamless platform to connect, collaborate, and create success stories.
+            </p>
+        </div>
+    </div>
 </div>

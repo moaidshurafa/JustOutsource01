@@ -14,7 +14,9 @@ namespace JustOutsource.DataAccess.Respiratory.IRespiratory
         IApplicationUserRepository ApplicationUser { get; }
         IOrderHeaderRespiratory OrderHeader { get; }
         IOrderDetailRespiratory OrderDetail { get; }
-        IJobRepository Job { get; }
+        IJobRepository Job {  get; }
+     
+
         void Save();
     }
 }
