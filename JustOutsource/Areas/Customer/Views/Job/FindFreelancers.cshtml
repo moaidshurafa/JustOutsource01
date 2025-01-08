@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<Freelancer>
 <div class="container mt-5">
-
+    <form asp-action="FindFreelancers" method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="searchCategory" class="form-control" placeholder="Search by category" value="@ViewData["SearchCategory"]" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     @foreach (var freelancer in Model)
     {
         <div class="col-lg-3 col-sm-6">

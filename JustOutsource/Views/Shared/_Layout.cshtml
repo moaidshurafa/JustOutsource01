@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,7 +19,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-laptop"></i> JustOutsource</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -43,16 +42,16 @@
 
                                 </ul>
                             </li>
-                            
+
                         }
                         @if(User.IsInRole(SD.Role_Freelancer)){
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Freelancer" asp-action="FindJob">Find a Job</a>
+                                <a class="nav-link" asp-area="Customer" asp-controller="Freelancer" asp-action="FindJob">Find a Job</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Freelancer" asp-action="Index">Add Freelancer</a>
+                                <a class="nav-link" asp-area="Customer" asp-controller="Freelancer" asp-action="Index">Add Freelancer</a>
                             </li>
-                            
+
                         }
                         @if (User.IsInRole(SD.Role_Job))
                         {
@@ -62,39 +61,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Job" asp-action="Index">Post Job</a>
                             </li>
-                           
+
                         }
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                                <i class="bi bi-cart"></i> &nbsp;
-                            </a>
-                        </li>
+                        @if (!User.IsInRole(SD.Role_Freelancer))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                    <i class="bi bi-cart"></i> &nbsp;
+                                </a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="About">About Us</a>
                         </li>
-                        
-                        
-                        @*     @if (User.IsInRole(SD.Role_Job) || User.IsInRole(SD.Role_Admin))
-                        {
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Job" asp-action="FindFreelancer">Find Freelancers</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Job" asp-action="Index">Add Job</a>
-                        </li>
-                        }
-                        @if (User.IsInRole(SD.Role_Freelancer) || User.IsInRole(SD.Role_Admin))
-                        {
-
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Freelancer" asp-action="FindJob">Find Work</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Freelancer" asp-action="Index">Add Freelance</a>
-                        </li>
-                        }
-                        *@
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -153,9 +153,20 @@ namespace JustOutsource.Areas.Customer.Controllers
             TempData["success"] = "Job post deleted successfully";
             return RedirectToAction("Index");
         }
-        public IActionResult FindFreelancers()
+        public IActionResult FindFreelancers(string searchCategory)
         {
-            IEnumerable<Freelancer> freelancerList = _unitOfWork.Freelancer.GetAll(includeProperties: "Category");
+            IEnumerable<Freelancer> freelancerList;
+
+            if (!string.IsNullOrEmpty(searchCategory))
+            {
+                freelancerList = _unitOfWork.Freelancer.GetAll(includeProperties: "Category")
+                    .Where(f => f.Category.CategoryName.Contains(searchCategory, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                freelancerList = _unitOfWork.Freelancer.GetAll(includeProperties: "Category");
+            }
+
             return View(freelancerList);
         }
         public IActionResult Details(int freelancerId)

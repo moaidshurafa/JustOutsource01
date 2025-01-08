@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<Job>
 <div class="container mt-5">
-
+    <form asp-action="FindJob" method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="searchTitle" class="form-control" placeholder="Search by job title" value="@ViewData["SearchTitle"]" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     @foreach (var job in Model)
     {
         <div class="col-lg-3 col-sm-6">

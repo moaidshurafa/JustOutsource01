@@ -7,15 +7,11 @@ using JustOutsource.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
 using System.Collections.Generic;
 using System.Security.Claims;
-
-
-
-namespace JustOutsource.Areas.Admin.Controllers
+namespace JustOutsource.Areas.Customer.Controllers
 {
-    [Area("Admin")]
+    [Area("Customer")]
     [Authorize(Roles = SD.Role_Freelancer)]
 
     public class FreelancerController : Controller
@@ -185,11 +181,24 @@ namespace JustOutsource.Areas.Admin.Controllers
             TempData["success"] = "Freelancer deleted successfully";
             return RedirectToAction("Index");
         }
-        public IActionResult FindJob()
+        public IActionResult FindJob(string searchTitle)
         {
-            IEnumerable<Job> JobList = _unitOfWork.Job.GetAll(includeProperties: "Category");
-            return View(JobList);
+            IEnumerable<Job> jobList;
+
+            if (!string.IsNullOrEmpty(searchTitle))
+            {
+                jobList = _unitOfWork.Job.GetAll(includeProperties: "Category")
+                    .Where(j => j.Title.Contains(searchTitle, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                jobList = _unitOfWork.Job.GetAll(includeProperties: "Category");
+            }
+
+            ViewData["SearchTitle"] = searchTitle; // Preserve the search term for the view
+            return View(jobList);
         }
+
         public IActionResult Details(int? id)
         {
             if (id == null || id == 0)
@@ -207,6 +216,6 @@ namespace JustOutsource.Areas.Admin.Controllers
 
             return View(jobFromDb);
         }
-        
+
     }
 }

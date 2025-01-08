@@ -32,7 +32,7 @@ namespace JustOutsource.Models
         [ValidateNever]
         public string CV { get; set; }
         [Required]
-        public DateTime DateOfBirth { get; set; } // Add this
+        public DateTime DateOfBirth { get; set; } 
         [Required]
         public int YearsOfExperience { get; set; }
         [Url]
